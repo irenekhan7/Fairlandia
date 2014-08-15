@@ -1,9 +1,10 @@
+<!-- NOTE: The indenting in this file is ridiculous. This should be cleaned up. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.demo.MainActivity" >
+    tools:context="com.fairlandia.ntv.MainActivity" >
         
 
   <RelativeLayout
@@ -18,7 +19,12 @@
       android:layout_width="match_parent"
     android:layout_height="match_parent"
         android:orientation="vertical">
-      
+        
+      <!-- Adding a little space to leave room for compass -->
+      <View
+  android:layout_width="1dp"
+  android:layout_height="30dp">
+</View>
     	<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
