@@ -78,19 +78,29 @@ var World = {
 		$("#panel-distance-range").slider("refresh");
 
 // Create 3D model drawable
-		var earth = new AR.Model("assets/travellers.wt3", {
+		var earth = new AR.Model("assets/ibm.wt3", {
 			scale: {
-   			 x: 0.3, 
-   			 y: 0.3,
-  			 z: 0.3
+   			 x: 0.1, 
+   			 y: 0.1,
+  			 z: 0.1
   			}
 		});
 
-		//Initial example : 250,7° from current location of the user (about West-South-West)  -7 northing and -20 easting
-		//Current example : 
-		var geoLoc = new AR.GeoLocation(40.8848, 73.8597, 320);
-		var loc = new AR.RelativeLocation(geoLoc, -2000, 0, -400);
-        var obj = new AR.GeoObject(loc, {
+/* Geolocation ex:
+var location1 = new AR.GeoLocation(47.77317, 13.069929);
+var altitude = location1.altitude; //altitude = -32768
+var location2 = new AR.GeoLocation(47.77317, 13.069929, 320.);
+altitude = location2.altitude; //alt = 320
+var object1 = new AR.GeoObject(location1);
+var object2 = new AR.GeoObject(location2);
+*/
+
+		//250,7° from current location of the user (about West-South-West)  -7 northing and -20 easting
+		var geoLoc = new AR.GeoLocation(40.88478, -73.85983);
+		//var loc = new AR.RelativeLocation(null, -2000, 0, -400);
+        //var loc = new AR.RelativeLocation(geoLoc, -7, -20, 1);
+        var loc = new AR.RelativeLocation(null, -2000, 0, -400);
+        var obj = new AR.GeoObject(geoLoc, {
             drawables: {
 				cam: [earth]
 			}
