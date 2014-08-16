@@ -29,11 +29,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
-	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 	public final static String LOCATION_MESSAGE = "com.fairlandia.ntv.LOC";
 
 	
@@ -233,16 +231,17 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 		currentLng = location.getLongitude();
 		
 		// Uncomment this to manually define the current location for development purposes.
-//		currentLat = 40.7490111;
-//		currentLng = -73.839838;
+		// The current values place the user at the Travelers Insurance pavilion.
+//		currentLat = 40.749986;
+//		currentLng = -73.837948;
 		
 		// For each location checks first if latitude is in range then if longitude is in range.
 		// If yes, set state to be at that location.
 		// If no, check next location until all checked, in which case set state to no location.
 		// This would be better served by checking against the array of locations instead of hard-coding the limits.
 		// (Limits are all +/- 0.000100 of the location's coordinates.)
+		//if((currentLat > 42.730993 && currentLat < 42.731103) && (currentLng > -73.688226 && currentLng < -73.6880206)){		// Places the pavilion near Broadway and 5th in Troy, NY for testing purposes.
 		if((currentLat > 40.745775 && currentLat < 40.745975) && (currentLng > -73.844429 && currentLng < -73.844229)){
-		//if((currentLat > 42.730993 && currentLat < 42.731103) && (currentLng > -73.688321 && currentLng < -73.688121)){		// Places the African pavilion near Broadway and 5th in Troy, NY for testing purposes.
 			atAfrica = true;
 			atUnisphere = false;
 			atIbm = false;
@@ -279,6 +278,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     	}
     	else{
     		mGui.setVisibility(View.GONE);
+//    		mGui.setVisibility(View.VISIBLE);	// Toggle to make gui always visible regardless of proximity to pavilion locations.
     	}
     	
 		// For development purposes, show the current location.

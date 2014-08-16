@@ -41,7 +41,7 @@ public class Video extends Activity {
 		 
 		 String videoVar = "";
 		 
-		 //if(loc.equalsIgnoreCase("africa")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.africa;
+		 if(loc.equalsIgnoreCase("africa")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.africa;
 		 if(loc.equalsIgnoreCase("unisphere")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.protest;
 		 if(loc.equalsIgnoreCase("ibm")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.ibm_atthefair;
 		 if(loc.equalsIgnoreCase("travelers")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.travelers;
