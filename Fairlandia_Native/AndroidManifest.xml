@@ -57,7 +57,8 @@
 		
 		<meta-data
 			android:name="com.google.android.maps.v2.API_KEY"
-			android:value="AIzaSyDHJfmeQOy1En-oFTwo1_YrMZctle7ArNY"/> <!-- Kate's Desktop -->
+			android:value="AIzaSyDNvOYO3GiqAvOcXZiArHj9lOZchjTbCyA" /> <!-- Release key -->
+			<!-- android:value="AIzaSyDHJfmeQOy1En-oFTwo1_YrMZctle7ArNY"/> --> <!-- Kate's Desktop -->
 			<!-- android:value="AIzaSyAEuTlvurYv9Rvt6MiB9Un6ThjpzyBAq60"/> --> <!-- Kate's Laptop -->
 			
     </application>
