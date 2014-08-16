@@ -1,54 +1,63 @@
-<!-- NOTE: The indenting in this file is ridiculous. This should be cleaned up. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.fairlandia.ntv.MainActivity" >
+    
+    <RelativeLayout
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent">
+    	
+		<fragment
+			android:id="@+id/map"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			class="com.google.android.gms.maps.SupportMapFragment"/>
+      
+			<LinearLayout
+				android:id="@+id/gui"    
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
         
+				<!-- Adding a little space to leave room for compass -->
+				<View
+					android:layout_width="1dp"
+					android:layout_height="30dp">
+				</View>
+	    	
+	    		<Button
+	        		android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+	        		android:background="@drawable/fred"
+	        		android:onClick="map" />
+        
+				<Button
+	        		android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/fblue"
+					android:onClick="model" />
+        
+				<Button
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/forange"
+					android:onClick="video" />
+			</LinearLayout>
+        
+    		<TextView android:id="@+id/debug_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="" />
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <fragment
-      android:id="@+id/map"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      class="com.google.android.gms.maps.SupportMapFragment"/>
-      <LinearLayout     
-      android:layout_width="match_parent"
-    android:layout_height="match_parent"
-        android:orientation="vertical">
-        
-      <!-- Adding a little space to leave room for compass -->
-      <View
-  android:layout_width="1dp"
-  android:layout_height="30dp">
-</View>
-    	<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/fred"
-        android:onClick="map" />
-        
-	<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/fblue"
-        android:onClick="model" />
-        
-	<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/forange"
-        android:onClick="video" />
-        </LinearLayout>
-        
-    <FrameLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:background="#D000"
-      android:padding="5dp">
-    </FrameLayout>		
-  </RelativeLayout>
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="#D000"
+			android:padding="5dp">
+    	</FrameLayout>
+    			
+	</RelativeLayout>
+	
 </LinearLayout>

@@ -344,7 +344,7 @@ int id action_context_bar 0x7f06002f
 int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060036
-int id action_settings 0x7f060050
+int id action_settings 0x7f060052
 int id activity_chooser_view_content 0x7f060037
 int id always 0x7f06000b
 int id beginning 0x7f060011
@@ -355,6 +355,7 @@ int id buy_with_google 0x7f060026
 int id checkbox 0x7f06003f
 int id classic 0x7f060029
 int id collapseActionView 0x7f06000d
+int id debug_text 0x7f060050
 int id default_activity_button 0x7f06003a
 int id dialog 0x7f06000e
 int id disableHome 0x7f060008
@@ -364,6 +365,7 @@ int id end 0x7f060013
 int id expand_activities_button 0x7f060038
 int id expanded_menu 0x7f06003e
 int id grayscale 0x7f06002a
+int id gui 0x7f06004f
 int id holo_dark 0x7f06001d
 int id holo_light 0x7f06001e
 int id home 0x7f060014
@@ -411,7 +413,7 @@ int id title 0x7f06003d
 int id top_action_bar 0x7f060032
 int id up 0x7f060033
 int id useLogo 0x7f060003
-int id videoView 0x7f06004f
+int id videoView 0x7f060051
 int id withText 0x7f06000c
 int id wrap_content 0x7f060025
 int integer abc_max_action_buttons 0x7f0a0000

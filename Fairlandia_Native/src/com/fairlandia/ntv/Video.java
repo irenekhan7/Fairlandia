@@ -35,9 +35,19 @@ public class Video extends Activity {
 		 getWindow().setFormat(PixelFormat.TRANSLUCENT);
 		 setContentView(R.layout.video);
 		 
+		 // Determine which video to show based on location.
+		 Intent intent = getIntent();
+		 String loc = intent.getStringExtra(MainActivity.LOCATION_MESSAGE);
+		 
+		 String videoVar = "";
+		 
+		 //if(loc.equalsIgnoreCase("africa")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.africa;
+		 if(loc.equalsIgnoreCase("unisphere")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.protest;
+		 if(loc.equalsIgnoreCase("ibm")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.ibm_atthefair;
+		 if(loc.equalsIgnoreCase("travelers")) videoVar = "android.resource://" + getPackageName() + "/" + R.raw.travelers;
+		 
 		 video=(VideoView)findViewById(R.id.videoView);
-		 video.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.ibm_atthefair));
-		 //video.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.travelers));
+		 video.setVideoURI(Uri.parse(videoVar));
 		 ctlr=new MediaController(this);
 		 ctlr.setMediaPlayer(video);
 		 video.setMediaController(ctlr);
@@ -63,7 +73,7 @@ public class Video extends Activity {
 //	    	startActivity(browserIntent);
 	    	
 	    	// Launch a new Android app.
-	    	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.fairlandia");
+	    	Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage("com.fairlandia");	    	
 	    	startActivity(LaunchIntent);
 	    }
 	    

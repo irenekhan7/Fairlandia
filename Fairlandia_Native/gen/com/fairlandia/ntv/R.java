@@ -1480,7 +1480,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060036;
-        public static final int action_settings=0x7f060050;
+        public static final int action_settings=0x7f060052;
         public static final int activity_chooser_view_content=0x7f060037;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
@@ -1491,6 +1491,7 @@ containing a value of this type.
         public static final int checkbox=0x7f06003f;
         public static final int classic=0x7f060029;
         public static final int collapseActionView=0x7f06000d;
+        public static final int debug_text=0x7f060050;
         public static final int default_activity_button=0x7f06003a;
         public static final int dialog=0x7f06000e;
         public static final int disableHome=0x7f060008;
@@ -1500,6 +1501,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060038;
         public static final int expanded_menu=0x7f06003e;
         public static final int grayscale=0x7f06002a;
+        public static final int gui=0x7f06004f;
         public static final int holo_dark=0x7f06001d;
         public static final int holo_light=0x7f06001e;
         public static final int home=0x7f060014;
@@ -1547,7 +1549,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f060032;
         public static final int up=0x7f060033;
         public static final int useLogo=0x7f060003;
-        public static final int videoView=0x7f06004f;
+        public static final int videoView=0x7f060051;
         public static final int withText=0x7f06000c;
         public static final int wrap_content=0x7f060025;
     }
