@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
@@ -124,22 +125,69 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
         mMap.setMyLocationEnabled(true);
 
         mImages.clear();
+
+        double n = 40.755000;
+        double s = 40.738304;
+        double e = -73.831240;
+        double w = -73.854829;
+        // WAY too much:
+//        double e = -73.840740;
+//        double w = -73.863329;
+        // I like these.
+//        double e = -73.830740;
+//        double w = -73.854329;        
+// ORIG:        
+//        double n = 40.754000;
+//        double s = 40.737304;
+//        double e = -73.83034;
+//        double w = -73.853629;
+// NOT ACCOUNTING FOR degrees lat != degrees long:
+//        double n = 40.748948;
+//        double s = 40.742356;
+//        double e = -73.838688;
+//        double w = -73.845281;
+// EVEN WORSE:
+//        double n = 40.749081;
+//        double s = 40.742223;
+//        double e = -73.839359;
+//        double w = -73.844611;
+        
+        LatLng sw = new LatLng(s, w);
+        LatLng ne = new LatLng(n, e);
         
         LatLngBounds flushingMeadowsBounds = new LatLngBounds(
-                new LatLng(40.737304, -73.853629),       	// South west corner of image
-        		new LatLng(40.754, -73.83034));    		 	// North east corner of image
+                sw,       	// South west corner of image
+        		ne);    	// North east corner of image
         GroundOverlayOptions flushingMeadowsMap = new GroundOverlayOptions()
                 .image(BitmapDescriptorFactory.fromResource(R.drawable.fairgrounds_big_square))
                 .positionFromBounds(flushingMeadowsBounds);
         mGroundOverlay = mMap.addGroundOverlay(flushingMeadowsMap);	// Save a reference in case you need to update the overlay (e.g. transparency)
         
-        for(String[] s: mapLocations){
-        	double lat = Double.parseDouble(s[1]);
-        	double lng = Double.parseDouble(s[2]);
+        for(String[] str: mapLocations){
+        	double lat = Double.parseDouble(str[1]);
+        	double lng = Double.parseDouble(str[2]);
 	        mMap.addMarker(new MarkerOptions()
 	                .position(new LatLng(lat, lng))
-	                .title(s[0]));
+	                .title(str[0]));
         }
+        
+//        // For development, add markers at the corners of the image.
+//        mMap.addMarker(new MarkerOptions()
+//        	.position(sw)
+//        	.title("SW Corner")
+//        	.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+//        mMap.addMarker(new MarkerOptions()
+//        	.position(ne)
+//        	.title("NE Corner")
+//        	.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+//        mMap.addMarker(new MarkerOptions()
+//        	.position(new LatLng(n, w))
+//        	.title("NW Corner (unspecified)")
+//        	.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+//        mMap.addMarker(new MarkerOptions()
+//    		.position(new LatLng(s, e))
+//    		.title("SE Corner (unspecified)")
+//    		.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
     }
 
     @Override
@@ -166,8 +214,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     	Intent intent = new Intent(this, Video.class);
     	
     	// Pass in a nickname for the current area so video class knows which video to display.
-    	String nickname = "";
-    	if(atAfrica) nickname = "africa";
+    	String nickname = "africa";	// default to Africa, mainly for testing purposes (e.g. when not actually at any location).
     	if(atUnisphere) nickname = "unisphere";
     	if(atIbm) nickname = "ibm";
     	if(atTravelers) nickname = "travelers";
@@ -205,8 +252,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
-		// TODO Auto-generated method stub
-		
+		// Auto-generated method stub
 	}
 
 	@Override
@@ -218,7 +264,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 
 	@Override
 	public void onDisconnected() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 	}
 
 	// Note that this would be better implemented with geofencing, but for this limited scope app, I chose what seemed like the quickest route.
@@ -239,8 +285,6 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 		// If yes, set state to be at that location.
 		// If no, check next location until all checked, in which case set state to no location.
 		// This would be better served by checking against the array of locations instead of hard-coding the limits.
-		// (Limits are all +/- 0.000100 of the location's coordinates.)
-		//if((currentLat > 42.730993 && currentLat < 42.731103) && (currentLng > -73.688226 && currentLng < -73.6880206)){		// Places the pavilion near Broadway and 5th in Troy, NY for testing purposes.
 		if((currentLat > 40.745775 && currentLat < 40.745975) && (currentLng > -73.844429 && currentLng < -73.844229)){
 			atAfrica = true;
 			atUnisphere = false;
@@ -271,19 +315,19 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 			atIbm = false;
 			atTravelers = false;
 		}
-		    	
+		
 		// Now that location has been determined, display relevant buttons only if currently at one of the designated locations.
     	if(atAfrica || atUnisphere || atIbm || atTravelers){
     		mGui.setVisibility(View.VISIBLE);
     	}
     	else{
-    		mGui.setVisibility(View.GONE);
-//    		mGui.setVisibility(View.VISIBLE);	// Toggle to make gui always visible regardless of proximity to pavilion locations.
+//    		mGui.setVisibility(View.GONE);
+    		mGui.setVisibility(View.VISIBLE);	// Toggle to make gui always visible regardless of proximity to pavilion locations.
     	}
     	
 		// For development purposes, show the current location.
 //    	TextView dbg = (TextView) findViewById(R.id.debug_text);
-//    	dbg.setText(currentLat + ", " + currentLng);
+//		dbg.setText(currentLat + ", " + currentLng);
     }
     
 }

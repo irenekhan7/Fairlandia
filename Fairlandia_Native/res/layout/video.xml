@@ -25,19 +25,19 @@
     	<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/fred"
+        android:background="@drawable/map_icon"
         android:onClick="map" />
         
 	<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/fblue"
+        android:background="@drawable/model_icon"
         android:onClick="model" />
         
 	<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/forange"
+        android:background="@drawable/video_icon"
         android:onClick="video" />
 	</LinearLayout>
 </FrameLayout>
