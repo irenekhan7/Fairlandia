@@ -316,13 +316,14 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 			atTravelers = false;
 		}
 		
+		//atAfrica = true;	// For development only.
 		// Now that location has been determined, display relevant buttons only if currently at one of the designated locations.
     	if(atAfrica || atUnisphere || atIbm || atTravelers){
     		mGui.setVisibility(View.VISIBLE);
     	}
     	else{
-//    		mGui.setVisibility(View.GONE);
-    		mGui.setVisibility(View.VISIBLE);	// Toggle to make gui always visible regardless of proximity to pavilion locations.
+    		mGui.setVisibility(View.GONE);
+//    		mGui.setVisibility(View.VISIBLE);	// Toggle to make gui always visible regardless of proximity to pavilion locations.
     	}
     	
 		// For development purposes, show the current location.
