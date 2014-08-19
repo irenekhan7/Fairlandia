@@ -14,28 +14,26 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int architectView=0x7f060002;
+        public static final int architectView=0x7f060001;
         public static final int buttonLaunchUrl=0x7f060000;
-        public static final int button_visit_url=0x7f060009;
-        public static final int mainFragement=0x7f060004;
-        public static final int mainFragementParent=0x7f060003;
-        public static final int map=0x7f060001;
-        public static final int poi_description=0x7f060007;
-        public static final int poi_id=0x7f060005;
-        public static final int poi_title=0x7f060006;
-        public static final int url=0x7f060008;
+        public static final int button_visit_url=0x7f060008;
+        public static final int mainFragement=0x7f060003;
+        public static final int mainFragementParent=0x7f060002;
+        public static final int poi_description=0x7f060006;
+        public static final int poi_id=0x7f060004;
+        public static final int poi_title=0x7f060005;
+        public static final int url=0x7f060007;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int list_main=0x7f030001;
         public static final int list_sample=0x7f030002;
         public static final int list_startscreen=0x7f030003;
-        public static final int map=0x7f030004;
-        public static final int sample_1=0x7f030005;
-        public static final int sample_cam=0x7f030006;
-        public static final int sample_cam_fragment_main=0x7f030007;
-        public static final int sample_poidetail=0x7f030008;
-        public static final int urllauncher_main=0x7f030009;
+        public static final int sample_1=0x7f030004;
+        public static final int sample_cam=0x7f030005;
+        public static final int sample_cam_fragment_main=0x7f030006;
+        public static final int sample_poidetail=0x7f030007;
+        public static final int urllauncher_main=0x7f030008;
     }
     public static final class string {
         public static final int app_name=0x7f040000;

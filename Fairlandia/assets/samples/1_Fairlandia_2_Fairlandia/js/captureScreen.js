@@ -78,34 +78,54 @@ var World = {
 		$("#panel-distance-range").slider("refresh");
 
 // Create 3D model drawable
-		var earth = new AR.Model("assets/ibm.wt3", {
+		var ibm = new AR.Model("assets/ibm.wt3", {
 			scale: {
-   			 x: 0.1, 
-   			 y: 0.1,
-  			 z: 0.1
+   			 x: 10, 
+   			 y: 10,
+  			 z: 10
+  			}
+		});
+		
+		var tp = new AR.Model("assets/TP.wt3", {
+			scale: {
+   			 x: .1, 
+   			 y: .1,
+  			 z: .1
+  			}
+		});
+		
+		var african = new AR.Model("assets/african.wt3", {
+			scale: {
+   			 x: 10, 
+   			 y: 10,
+  			 z: 10
   			}
 		});
 
-/* Geolocation ex:
-var location1 = new AR.GeoLocation(47.77317, 13.069929);
-var altitude = location1.altitude; //altitude = -32768
-var location2 = new AR.GeoLocation(47.77317, 13.069929, 320.);
-altitude = location2.altitude; //alt = 320
-var object1 = new AR.GeoObject(location1);
-var object2 = new AR.GeoObject(location2);
-*/
 
 		//250,7° from current location of the user (about West-South-West)  -7 northing and -20 easting
-		var geoLoc = new AR.GeoLocation(40.88478, -73.85983);
-		//var loc = new AR.RelativeLocation(null, -2000, 0, -400);
-        //var loc = new AR.RelativeLocation(geoLoc, -7, -20, 1);
-        var loc = new AR.RelativeLocation(null, -2000, 0, -400);
-        var obj = new AR.GeoObject(geoLoc, {
+		var geoLoc = new AR.GeoLocation(42.73083, -73.68112);
+		var ibmLoc = new AR.GeoLocation(40.749110, -73.839737, -1000);
+		var africanLoc = new AR.GeoLocation(40.74587, -73.84420, -30);
+		var tpLoc = new AR.GeoLocation(40.750085, -73.837849);
+        
+        var ibmObj = new AR.GeoObject(ibmLoc, {
             drawables: {
-				cam: [earth]
+				cam: [ibm]
+			}
+		});
+
+        var africanObj = new AR.GeoObject(africanLoc, {
+            drawables: {
+				cam: [african]
 			}
 		});
 		
+        var tpObj = new AR.GeoObject(geoLoc, {
+            drawables: {
+				cam: [tp]
+			}
+		});		
 		World.initialized = true;
 	},
 
