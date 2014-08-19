@@ -121,7 +121,7 @@ var World = {
 			}
 		});
 
-        var africanObj = new AR.GeoObject(geoLoc, {
+        var africanObj = new AR.GeoObject(africanLoc, {
             drawables: {
 				cam: [african]
 			}
