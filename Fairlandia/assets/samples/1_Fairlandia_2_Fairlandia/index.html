@@ -41,17 +41,50 @@
 </head>
     
     <body>
+    
+            <script>
+            function playAudio(filePath)
+            {
+             var sound = new AR.Sound(filePath, {
+             onLoaded : function(){sound.play();},
+             onError : function(){
+             // alert the user that the sound file could not be loaded
+            },
+            });
+             sound.onFinishedPlaying = function(){alert("Playing finished");};
+			 sound.load();
+			 sound.play();
+			 document.getElementById("audiobuttons").style.visibility="hidden";
+			}
+			
+			function showAudio()
+			{
+			 document.getElementById("audiobuttons").style.visibility="visible";
+			}
+			</script>
+			
      <div data-role="page" id="page1" style="background: none;" >
             
             <!-- MAIN PAGE CONTENT -->
 
             <!-- header of UI holding feature buttons -->
             <div id ="header-status" data-role="header" data-position="fixed" data-theme="c">
-                <a href="javascript: World.showRange();" data-icon="gear" data-inline="true" data-mini="true">Range</a>
+            
+
+            
+            <!--    <a href="javascript: World.showRange();" data-icon="gear" data-inline="true" data-mini="true">Range</a>
                 <a href="javascript: World.captureScreen()" data-icon="refresh" >Snapshot</a>
-                <h1></h1>
+                <h1></h1> -->
             </div>
 
+            <img style="margin-top: 30px; height:100px; width:auto; float:right;" onclick="showAudio()" src="assets/musicIcon.png" id="music-icon" />
+            <div id="audiobuttons" style="visibility:hidden">
+            <button class="audio-button" type="button" style="text-align:center" onclick="playAudio('assets/unisphere.mp3')">Play Unisphere Audio</button>
+            <button class="audio-button" type="button" style="text-align:center" onclick="playAudio('assets/travellers.mp3')">Play Traveller's Audio</button>
+            <button class="audio-button" type="button" style="text-align:center" onclick="playAudio('assets/ibm.mp3')">Play IBM Audio</button>
+     
+            </div>         
+            
             <!-- the radar div - Wikitude SDK radar will be drawn into this div -->
             <div class="radarContainer_left" id="radarContainer"></div>
 
@@ -59,8 +92,8 @@
             <div data-role="footer" class="ui-bar" data-theme="f" data-position="fixed" style="text-align:center;">
 
                 <!-- small status-button -->
-                <a style="text-align:right;" id="popupInfoButton" href="#popupInfo" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="alert" data-theme="e" data-iconpos="notext">Log</a> </p>
-
+                <!--<a style="text-align:right;" id="popupInfoButton" href="#popupInfo" data-rel="popup" data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="alert" data-theme="e" data-iconpos="notext">Log</a> </p>
+-->
                 <!-- popup displayed when button clicked -->
                 <div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
                   <p style="text-align:right;" id="status-message">Trying to find out where you are</p>

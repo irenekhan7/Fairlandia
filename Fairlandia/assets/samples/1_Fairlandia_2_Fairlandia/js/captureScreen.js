@@ -46,6 +46,12 @@ var World = {
 		$('#radarContainer').unbind('click');
 		$("#radarContainer").click(PoiRadar.clickedRadar);
 
+		//Locations
+		var geoLoc = new AR.GeoLocation(42.73083, -73.68112);
+		var ibmLoc = new AR.GeoLocation(40.749110, -73.839737, -1000);
+		var africanLoc = new AR.GeoLocation(40.74587, -73.84420, -30);
+		var tpLoc = new AR.GeoLocation(40.750085, -73.837849);
+		
 		// empty list of visible markers
 		World.markerList = [];
 
@@ -54,7 +60,11 @@ var World = {
 		World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
 
-		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
+		//Create POI for audio
+		poiData=[
+
+]
+
 		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
 			var singlePoi = {
 				"id": poiData[currentPlaceNr].id,
@@ -77,7 +87,8 @@ var World = {
 		$("#panel-distance-range").val(100);
 		$("#panel-distance-range").slider("refresh");
 
-// Create 3D model drawable
+
+        //Create 3D model drawables
 		var ibm = new AR.Model("assets/ibm.wt3", {
 			scale: {
    			 x: 10, 
@@ -102,26 +113,21 @@ var World = {
   			}
 		});
 
-
-		//250,7° from current location of the user (about West-South-West)  -7 northing and -20 easting
-		var geoLoc = new AR.GeoLocation(42.73083, -73.68112);
-		var ibmLoc = new AR.GeoLocation(40.749110, -73.839737, -1000);
-		var africanLoc = new AR.GeoLocation(40.74587, -73.84420, -30);
-		var tpLoc = new AR.GeoLocation(40.750085, -73.837849);
-        
+  
+        //Render models
         var ibmObj = new AR.GeoObject(ibmLoc, {
             drawables: {
 				cam: [ibm]
 			}
 		});
 
-        var africanObj = new AR.GeoObject(africanLoc, {
+        var africanObj = new AR.GeoObject(geoLoc, {
             drawables: {
 				cam: [african]
 			}
 		});
 		
-        var tpObj = new AR.GeoObject(geoLoc, {
+        var tpObj = new AR.GeoObject(tpLoc, {
             drawables: {
 				cam: [tp]
 			}
