@@ -40,16 +40,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Model"
-            android:label="@string/model_title"
-            android:parentActivityName="com.fairlandia.ntv.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.demo.MainActivity" />
-        </activity>
-        <activity
             android:name=".Video"
             android:label="@string/video_title"
+            android:configChanges="orientation"
             android:parentActivityName="com.fairlandia.ntv.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.support.v4.app.FragmentActivity;
 import android.content.Intent;
+import android.graphics.Color;		// Used for testing only.
 import android.location.Location;
 import com.google.android.gms.location.LocationListener;
 import android.os.Bundle;
@@ -29,8 +30,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.TextView;		// Used for testing only.
 
+
+// TODO: Use geofencing for location determination.
+// TODO: Create a location object instead of depending on an array.
+// TODO: Wrap all "for development" code in a conditional to allow easy and straightforward toggling of development and production mode. (Ideally, add some key combination to production app to toggle this while running.)
 
 public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
 	public final static String LOCATION_MESSAGE = "com.fairlandia.ntv.LOC";
@@ -43,7 +48,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     	{"IBM Pavilion","40.749110", "-73.839737"},
     	{"Unisphere","40.746330","-73.845080"},
     	{"African Pavilion","40.745875","-73.844329"}
-    };
+    };			// The order of this array must be maintained for location checking to function.
     LinearLayout mGui;
     
     // State management, i.e., what pavilion zone, if any, is the user currently in?
@@ -77,7 +82,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
         mLocationClient = new LocationClient(this, this, this);
         mUpdatesRequested = false;
 
-        mLocationRequest = new LocationRequest();	// This can contain interval preferences - how often to query for location change, etc.
+        mLocationRequest= new LocationRequest();	// This can contain interval preferences - how often to query for location change, etc.
         // Use high accuracy
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         // Set the update interval to 5 seconds
@@ -125,32 +130,12 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
         mMap.setMyLocationEnabled(true);
 
         mImages.clear();
-
-        double n = 40.755000;
-        double s = 40.738304;
-        double e = -73.831240;
-        double w = -73.854829;
-        // WAY too much:
-//        double e = -73.840740;
-//        double w = -73.863329;
-        // I like these.
-//        double e = -73.830740;
-//        double w = -73.854329;        
-// ORIG:        
-//        double n = 40.754000;
-//        double s = 40.737304;
-//        double e = -73.83034;
-//        double w = -73.853629;
-// NOT ACCOUNTING FOR degrees lat != degrees long:
-//        double n = 40.748948;
-//        double s = 40.742356;
-//        double e = -73.838688;
-//        double w = -73.845281;
-// EVEN WORSE:
-//        double n = 40.749081;
-//        double s = 40.742223;
-//        double e = -73.839359;
-//        double w = -73.844611;
+        
+        // Using variables for this to allow for easier testing and debugging.
+		double n = 40.754500;
+		double s = 40.737804;
+		double e = -73.830640;
+		double w = -73.853629;
         
         LatLng sw = new LatLng(s, w);
         LatLng ne = new LatLng(n, e);
@@ -206,7 +191,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
         if (id == R.id.action_settings) {
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);	
     }
     
     /** Called when the user clicks the video button */
@@ -240,9 +225,9 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     
     /** Called when the user clicks the map button */
     // Currently non-functional because the map is there by default and back navigates to it sufficiently.
-    // I'm presently using it to test location.
+    // Leaving here as it makes for a nice way to run a test by click.
     public void map(View view) {
-    	Location mCurrentLocation = mLocationClient.getLastLocation();
+//    	Location mCurrentLocation = mLocationClient.getLastLocation();
 //    	
 //    	TextView dbg = (TextView) findViewById(R.id.debug_text);
 //    	dbg.append(mCurrentLocation.toString());
@@ -277,33 +262,49 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 		currentLng = location.getLongitude();
 		
 		// Uncomment this to manually define the current location for development purposes.
-		// The current values place the user at the Travelers Insurance pavilion.
+		// These values place the user at the Travelers Insurance pavilion.
 //		currentLat = 40.749986;
 //		currentLng = -73.837948;
+		// These values place the user at the IBM pavilion.
+//		currentLat = 40.749233;
+//		currentLng = -73.839645;
 		
+    	double unisphereLat = Double.parseDouble(mapLocations[2][1]);
+    	double unisphereLong = Double.parseDouble(mapLocations[2][2]);
+    	double travLat = Double.parseDouble(mapLocations[0][1]);
+    	double travLong = Double.parseDouble(mapLocations[0][2]);
+    	double ibmLat = Double.parseDouble(mapLocations[1][1]);
+    	double ibmLong = Double.parseDouble(mapLocations[1][2]);
+    	double africaLat = Double.parseDouble(mapLocations[3][1]);
+    	double africaLong = Double.parseDouble(mapLocations[3][2]);
+		
+		// Based on on-site testing, the unisphere's region is defined as +/- 0.000400 degrees of latitude and longitude.
+    	// The other regions are defined as 1/3rd of that (+/- 0.000133).
+    	double unisphereRange = 0.000400;
+    	double otherRange = 0.000133;
+    	
 		// For each location checks first if latitude is in range then if longitude is in range.
 		// If yes, set state to be at that location.
 		// If no, check next location until all checked, in which case set state to no location.
-		// This would be better served by checking against the array of locations instead of hard-coding the limits.
-		if((currentLat > 40.745775 && currentLat < 40.745975) && (currentLng > -73.844429 && currentLng < -73.844229)){
+    	if((currentLat > (africaLat - otherRange) && currentLat < (africaLat + otherRange)) && (currentLng > (africaLong - otherRange) && currentLng < (africaLong + otherRange))){
 			atAfrica = true;
 			atUnisphere = false;
 			atIbm = false;
 			atTravelers = false;
 		}
-		else if ((currentLat > 40.746230 && currentLat < 40.746430) && (currentLng > -73.845180 && currentLng < -73.844980)){
+		else if((currentLat > (unisphereLat - unisphereRange) && currentLat < (unisphereLat + unisphereRange)) && (currentLng > (unisphereLong - unisphereRange) && currentLng < (unisphereLong + unisphereRange))){
 			atAfrica = false;
 			atUnisphere = true;
 			atIbm = false;
-			atTravelers = false;			
+			atTravelers = false;
 		}
-		else if ((currentLat > 40.749010 && currentLat < 40.749210) && (currentLng > -73.839837 && currentLng < -73.839637)){
+		else if((currentLat > (ibmLat - otherRange) && currentLat < (ibmLat + otherRange)) && (currentLng > (ibmLong - otherRange) && currentLng < (ibmLong + otherRange))){
 			atAfrica = false;
 			atUnisphere = false;
 			atIbm = true;
 			atTravelers = false;
 		}
-		else if ((currentLat > 40.749985 && currentLat < 40.750185) && (currentLng > -73.837949 && currentLng < -73.837749)){
+		else if((currentLat > (travLat - otherRange) && currentLat < (travLat + otherRange)) && (currentLng > (travLong - otherRange) && currentLng < (travLong + otherRange))){
 			atAfrica = false;
 			atUnisphere = false;
 			atIbm = false;
@@ -316,7 +317,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 			atTravelers = false;
 		}
 		
-		//atAfrica = true;	// For development only.
+		//atTravelers = true;	// For development only.
 		// Now that location has been determined, display relevant buttons only if currently at one of the designated locations.
     	if(atAfrica || atUnisphere || atIbm || atTravelers){
     		mGui.setVisibility(View.VISIBLE);
@@ -329,6 +330,5 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
 		// For development purposes, show the current location.
 //    	TextView dbg = (TextView) findViewById(R.id.debug_text);
 //		dbg.setText(currentLat + ", " + currentLng);
-    }
-    
+    }  
 }
