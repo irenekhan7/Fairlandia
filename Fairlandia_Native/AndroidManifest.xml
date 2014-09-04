@@ -29,16 +29,34 @@
 		<meta-data
 			android:name="com.google.android.gms.version"
 			android:value="@integer/google_play_services_version" />
+			
+		<!-- Splash screen -->
+        <activity
+            android:name=".Splashscreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         
+        <!--
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
+        
+		<activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
         <activity
             android:name=".Video"
             android:label="@string/video_title"
@@ -51,8 +69,8 @@
 		
 		<meta-data
 			android:name="com.google.android.maps.v2.API_KEY"
-			android:value="AIzaSyDHJfmeQOy1En-oFTwo1_YrMZctle7ArNY"/> <!-- Kate's Desktop -->
-			<!-- android:value="AIzaSyDNvOYO3GiqAvOcXZiArHj9lOZchjTbCyA" /> --> <!-- Release key -->
+			android:value="AIzaSyDNvOYO3GiqAvOcXZiArHj9lOZchjTbCyA" /> <!-- Release key -->
+			<!-- android:value="AIzaSyDHJfmeQOy1En-oFTwo1_YrMZctle7ArNY"/> --> <!-- Kate's Desktop -->
 			<!-- android:value="AIzaSyAEuTlvurYv9Rvt6MiB9Un6ThjpzyBAq60"/> --> <!-- Kate's Laptop -->
 			
     </application>
