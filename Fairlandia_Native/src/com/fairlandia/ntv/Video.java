@@ -80,7 +80,7 @@ public class Video extends Activity {
 	    /** Called when the user clicks the map button */
 	    public void map(View view) {
 	    	Intent intent = new Intent(this, MainActivity.class);
-	    	startActivity(intent);;
+	    	startActivity(intent);
 	    }
 }
 
