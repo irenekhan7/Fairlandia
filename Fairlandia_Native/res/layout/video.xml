@@ -40,4 +40,5 @@
         android:background="@drawable/video_icon"
         android:onClick="video" />
 	</LinearLayout>
+	
 </FrameLayout>
