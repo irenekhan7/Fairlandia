@@ -24,6 +24,8 @@ import android.support.v4.app.FragmentActivity;
 import android.content.Intent;
 import android.graphics.Color;		// Used for testing only.
 import android.location.Location;
+import android.media.MediaPlayer;
+
 import com.google.android.gms.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
@@ -97,6 +99,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     @Override
     protected void onStart() {
         super.onStart();
+        
         // Connect the client.
         mLocationClient.connect();
     }
@@ -106,6 +109,7 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
         // Disconnecting the client invalidates it.
         mLocationClient.disconnect();
         super.onStop();
+
     }
 
     @Override
