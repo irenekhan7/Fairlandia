@@ -8,5 +8,7 @@
     <string name="model_title">Welcome to the Pavilion</string>
     <string name="hello_world">Hello world!</string>
     <string name="model_placeholder_text">The model will go here.</string>
+    
+    <color name="white">#FFFFFF</color>
 
 </resources>
